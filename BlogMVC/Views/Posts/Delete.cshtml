@@ -1,48 +1,29 @@
-﻿@model BlogMVC.Models.Post
+﻿@using BlogMVC.Helpers
+@model BlogMVC.Models.Post
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удалить пост";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены, что хотите это удалить?</h3>
 <div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+  <div class="blogDiv">
+        <h5> @Html.DisplayFor(modelItem => modelItem.Title)</h5>
+        @Html.CustomDispay(modelItem => modelItem.Text)
+        <br />
+        <p class="Date">
+            @Html.DisplayNameFor(modelItem => modelItem.Time)-
+        @Html.DisplayFor(modelItem => modelItem.Time)
+    </p>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Text)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("На главную страницу", "Index")
         </div>
     }
 </div>

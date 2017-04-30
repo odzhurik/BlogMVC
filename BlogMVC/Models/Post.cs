@@ -13,6 +13,7 @@ namespace BlogMVC.Models
         public string Title { get; set; }
         [Display(Name ="Текст")]
         public string Text { get; set; }
+        [Display(Name ="Дата добавления")]
         public DateTime Time { get; set; }
     }
 }

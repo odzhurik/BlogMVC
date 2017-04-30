@@ -1,46 +1,33 @@
-﻿@model IEnumerable<BlogMVC.Models.Post>
+﻿@using BlogMVC.Helpers
+@model IEnumerable<BlogMVC.Models.Post>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Главная страница";
 }
 
-<h2>Index</h2>
+<h2>Главная страница</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Написать пост", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
-        <th></th>
-    </tr>
+
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
+        <div class="blogDiv">
+            <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
+           
+                  @Html.CustomDispay(modelItem => item.Text)
+            <br />
+            <p class="Date">@Html.DisplayNameFor(modelItem=>modelItem.Time)-
                 @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
+                </p>
+           <br />
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Посмотреть подробнее", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
+            </div>
+            
     }
 
-</table>
+

@@ -1,9 +1,10 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Bad+Script');
 @import url('https://fonts.googleapis.com/css?family=Neucha');
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background:url(Images/7747.jpg);
+    background: url(Images/7747.jpg);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -30,13 +31,20 @@ textarea {
     border: 2px solid CornflowerBlue;
     border-radius: 20px;
     background-color: aquamarine;
-    text-align: center
+    text-align: center;
 }
 
     .blogDiv h5 {
         font-family: 'Bad Script', cursive;
         font-weight: bold;
     }
+
+.CommentDiv {
+    border: 2px dashed #707ED7;
+    border-radius: 20px;
+    text-align: center;
+    margin: 10px;
+}
 
 .Date {
     font-family: 'Neucha', cursive;

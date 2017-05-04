@@ -1,5 +1,6 @@
 ﻿@using BlogMVC.Helpers
-@model IEnumerable<BlogMVC.Models.Post>
+@using Entities
+@model IEnumerable<Post>
 
 @{
     ViewBag.Title = "Главная страница";
@@ -17,7 +18,7 @@
         <div class="blogDiv">
             <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
            
-                  @Html.CustomDispay(modelItem => item.Text)
+                  @Html.CustomDisplay(modelItem => item.Text)
             <br />
             <p class="Date">@Html.DisplayNameFor(modelItem=>modelItem.Time)-
                 @Html.DisplayFor(modelItem => item.Time)

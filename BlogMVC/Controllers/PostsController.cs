@@ -1,34 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using DAL;
+using DAL.Repository;
+using Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BlogMVC.Models;
-using BlogMVC.Models.DAL;
 
 namespace BlogMVC.Controllers
 {
     public class PostsController : Controller
     {
-        private BlogContext db = new BlogContext();
-
-        // GET: Posts
+        private IPostRepository _repository;
+        public PostsController(IPostRepository repository)
+        {
+            _repository = repository;
+        }
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            return View(_repository.GetPosts());
         }
-
-        // GET: Posts/Details/5
+     
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = _repository.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -51,8 +49,7 @@ namespace BlogMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
-                db.SaveChanges();
+                _repository.AddPost(post);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +63,7 @@ namespace BlogMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = _repository.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -83,8 +80,7 @@ namespace BlogMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
+                _repository.EditPost(post);
                 return RedirectToAction("Index");
             }
             return View(post);
@@ -97,7 +93,7 @@ namespace BlogMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = _repository.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -110,19 +106,9 @@ namespace BlogMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = db.Posts.Find(id);
-            db.Posts.Remove(post);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+             _repository.DeletePost(id);
+              return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }

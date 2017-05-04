@@ -1,42 +1,34 @@
-﻿@model BlogMVC.Models.Post
+﻿@using BlogMVC.Helpers
+@using Entities
+@model Post
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Title;
 }
 
-<h2>Details</h2>
+<h3 style="text-align:center;"> @Html.DisplayFor(modelItem => modelItem.Title)</h3>
+<br />
+<div class="blogDiv">
 
-<div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Text)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-
-    </dl>
+    @Html.Hidden("ID", Model.ID);
+    @Html.CustomDisplay(modelItem => modelItem.Text)
+    <br />
+    <p class="Date">
+        @Html.DisplayNameFor(modelItem => modelItem.Time)-
+        @Html.DisplayFor(modelItem => modelItem.Time)
+    </p>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("На главную", "Index")|
+    @Html.ActionLink("Комментировать", "Create", "Comments", new { id = "AddComment" })
 </p>
+<div id="CommentCreate" style="padding: 40px;">
+
+</div>
+<h3>Комментарии</h3>
+<div id="CommentsList">
+
+</div>
+<script src="~/Scripts/Comments.js"></script>

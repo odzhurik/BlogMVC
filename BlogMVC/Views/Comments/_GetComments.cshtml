@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Entities.Comment>
+@foreach (var item in Model)
+{
+    <div class="CommentDiv" id="comment-@item.ID">
+        @Html.DisplayFor(modelItem => item.Text)
+        <br />
+        <p class="Date">
+            @Html.DisplayNameFor(modelItem => modelItem.Time)-
+            @Html.DisplayFor(modelItem => item.Time)
+        </p>
+        
+        @Html.ActionLink("Редактировать", "Edit", new { id = item.ID }, new { @class = "EditComment", id = "comment-" + item.ID }) |
+        @Html.ActionLink("Удалить", "Delete", new { id = item.ID }, new { @class = "DeleteComment" })
+    </div>
+}
+
+
+

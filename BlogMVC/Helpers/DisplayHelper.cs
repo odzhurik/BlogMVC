@@ -9,7 +9,7 @@ namespace BlogMVC.Helpers
 {
     public static class DisplayHelper
     {
-        public static MvcHtmlString CustomDispay<TModel,TValue>(this HtmlHelper <TModel> helper, Expression<Func<TModel, TValue>> expression)
+        public static MvcHtmlString CustomDisplay<TModel,TValue>(this HtmlHelper <TModel> helper, Expression<Func<TModel, TValue>> expression)
         {
             var name = ExpressionHelper.GetExpressionText(expression);
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);

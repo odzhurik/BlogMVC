@@ -23,15 +23,15 @@ namespace BlogMVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(User model)
+        public ActionResult Login(User enteredUser)
         {
             if (ModelState.IsValid)
             {
                 User user = null;
-                user = _repository.FindUser(model);
+                user = _repository.FindUser(enteredUser);
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, true);
+                    FormsAuthentication.SetAuthCookie(enteredUser.UserName, true);
                     return RedirectToAction("Index", "Posts");
                 }
                 else
@@ -39,7 +39,7 @@ namespace BlogMVC.Controllers
                     ModelState.AddModelError("", "Doesn't exist this user");
                 }
             }
-            return View(model);
+            return View(enteredUser);
         }
         [HttpGet]
         public JsonResult CheckUserName(string userName)
@@ -57,13 +57,13 @@ namespace BlogMVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel newUser)
         {
             if (ModelState.IsValid)
             {
                 User user = new User();
-                user.UserName = model.Name;
-                user.Password = model.Password;
+                user.UserName = newUser.Name;
+                user.Password = newUser.Password;
                 if (_repository.AddUser(user))
                 {
                     return RedirectToAction("Index",new { Controller="Posts", id=user.ID});

@@ -2,6 +2,7 @@
 @foreach (var item in Model)
 {
     <div class="CommentDiv" id="comment-@item.ID">
+        <label class="control-label">@Html.ActionLink(@item.User.UserName,"Index",new {Controller="Posts",id=item.UserID})'s says:</label>
         @Html.DisplayFor(modelItem => item.Text)
         <br />
         <p class="Date">
@@ -9,8 +10,8 @@
             @Html.DisplayFor(modelItem => item.Time)
         </p>
         
-        @Html.ActionLink("Редактировать", "Edit", new { id = item.ID }, new { @class = "EditComment", id = "comment-" + item.ID }) |
-        @Html.ActionLink("Удалить", "Delete", new { id = item.ID }, new { @class = "DeleteComment" })
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "EditComment", id = "comment-" + item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "DeleteComment" })
     </div>
 }
 

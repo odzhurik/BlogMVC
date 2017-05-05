@@ -1,11 +1,9 @@
 ﻿@using BlogMVC.Helpers
 @using Entities
 @model Post
-
 @{
     ViewBag.Title = Model.Title;
 }
-
 <h3 style="text-align:center;"> @Html.DisplayFor(modelItem => modelItem.Title)</h3>
 <br />
 <div class="blogDiv">
@@ -20,8 +18,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Home page", "Index")|
+    @Html.ActionLink("Back to "+(string)ViewBag.Name+"'s page", "Index",new {Controller="Posts",id=Model.UserID})|
     @Html.ActionLink("Leave a comment", "Create", "Comments", new { id = "AddComment" })
 </p>
 <div id="CommentCreate" style="padding: 40px;">
@@ -32,3 +29,4 @@
 
 </div>
 <script src="~/Scripts/Comments.js"></script>
+

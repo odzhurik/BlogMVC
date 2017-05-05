@@ -25,7 +25,8 @@ $("div#CommentCreate").on("click", "input#CreateBtn", function (e) {
         {
             Text: $("#CommentText").val(),
             Time: $("#Time").val(),
-            PostID: $("#PostID").val()
+            PostID: $("#PostID").val(),
+            UserID: $("#UserID").val()
         }
     }
     $.ajax({
@@ -79,7 +80,8 @@ $("div#CommentsList").on("click", "input#EditCommentBtn", (function (e) {
             ID: $("#CommentID").val(),
             Text: $("#CommentText").val(),
             Time: $("#CommentTime").val(),
-            PostID: $("#PostID").val()
+            PostID: $("#PostID").val(),
+            UserID:$("#UserID").val()
         }
     }
     $.ajax({
@@ -97,7 +99,8 @@ $("div#CommentsList").on("click", "input#EditCommentBtn", (function (e) {
 function GetComments(id) {
     $.ajax({
         type: "GET",
-        url: "/Comments/GetComments/?PostID=" + id
+        url: "/Comments/GetComments/?PostID=" + id,
+        cache: false
     })
         .success(
         function (result) {

@@ -13,9 +13,11 @@ namespace Entities
         [StringLength(int.MaxValue)]
         [Required]
         public string Text { get; set; }
-        [Display(Name = "Дата добавления")]
+        [Display(Name = "Added")]
         public DateTime Time { get; set; }
         public int PostID { get; set; }
+        public int? UserID { get; set; }
+        public virtual User User { get; set; }
         virtual public Post Post { get; set; }
     }
 }

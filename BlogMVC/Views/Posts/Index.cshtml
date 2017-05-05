@@ -3,13 +3,13 @@
 @model IEnumerable<Post>
 
 @{
-    ViewBag.Title = "Главная страница";
+    ViewBag.Title = "Home Page";
 }
 
-<h2>Главная страница</h2>
+<h2>Home page</h2>
 
 <p>
-    @Html.ActionLink("Написать пост", "Create")
+    @Html.ActionLink("Create a post", "Create")
 </p>
 
 
@@ -24,9 +24,9 @@
                 @Html.DisplayFor(modelItem => item.Time)
                 </p>
            <br />
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Посмотреть подробнее", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </div>
             
     }

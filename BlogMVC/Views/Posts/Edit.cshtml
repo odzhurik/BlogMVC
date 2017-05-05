@@ -2,10 +2,10 @@
 @model Post
 
 @{
-    ViewBag.Title = "Редактировать пост";
+    ViewBag.Title = "Edit post";
 }
 
-<h2>Редактировать</h2>
+<h2>Edit</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -43,7 +43,7 @@
 }
 
 <div>
-    @Html.ActionLink("На главную страницу", "Index")
+    @Html.ActionLink("Home Page", "Index")
 </div>
 
 @section Scripts {

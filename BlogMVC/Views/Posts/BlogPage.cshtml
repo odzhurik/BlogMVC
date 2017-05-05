@@ -1,0 +1,25 @@
+﻿@using BlogMVC.Helpers
+@using Entities
+@model IEnumerable<Post>
+@{
+    ViewBag.Title = (string)ViewBag.Name+"'s Page";
+}
+
+<h2>@ViewBag.Name's Page</h2>
+@foreach (var item in Model)
+{
+    <div class="blogDiv">
+        <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
+
+        @Html.CustomDisplay(modelItem => item.Text)
+        <br />
+        <p class="Date">
+            @Html.DisplayNameFor(modelItem => modelItem.Time)-
+        @Html.DisplayFor(modelItem => item.Time)
+    </p>
+    <br />
+     @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+ </div>
+
+}
+

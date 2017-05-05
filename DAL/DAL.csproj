@@ -56,12 +56,26 @@
     <Compile Include="Migrations\201705040952540_m1.Designer.cs">
       <DependentUpon>201705040952540_m1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705041336319_added user.cs" />
+    <Compile Include="Migrations\201705041336319_added user.Designer.cs">
+      <DependentUpon>201705041336319_added user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705041339305_changed userID.cs" />
+    <Compile Include="Migrations\201705041339305_changed userID.Designer.cs">
+      <DependentUpon>201705041339305_changed userID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705041350416_changed user.cs" />
+    <Compile Include="Migrations\201705041350416_changed user.Designer.cs">
+      <DependentUpon>201705041350416_changed user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705050725371_changed db.cs" />
+    <Compile Include="Migrations\201705050725371_changed db.Designer.cs">
+      <DependentUpon>201705050725371_changed db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CommentRepository.cs" />
-    <Compile Include="Repository\ICommentRepository.cs" />
-    <Compile Include="Repository\PostRepository.cs" />
-    <Compile Include="Repository\IPostRepository.cs" />
+    <Compile Include="Repository\BlogRepository.cs" />
+    <Compile Include="Repository\IBlogRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -79,6 +93,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705040952540_m1.resx">
       <DependentUpon>201705040952540_m1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041336319_added user.resx">
+      <DependentUpon>201705041336319_added user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041339305_changed userID.resx">
+      <DependentUpon>201705041339305_changed userID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041350416_changed user.resx">
+      <DependentUpon>201705041350416_changed user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705050725371_changed db.resx">
+      <DependentUpon>201705050725371_changed db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

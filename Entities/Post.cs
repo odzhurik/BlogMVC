@@ -9,16 +9,18 @@ namespace Entities
     public class Post
     {
         public int ID { get; set; }
-        [Display(Name ="Заголовок")]
+        [Display(Name ="Title of post")]
         [Required]
         public string Title { get; set; }
-        [Display(Name ="Текст")]
+        [Display(Name ="Text of post")]
         [StringLength(int.MaxValue)]
         [Required]
         public string Text { get; set; }
-        [Display(Name ="Дата добавления")]
+        [Display(Name ="Added")]
         public DateTime Time { get; set; }
         virtual public ICollection<Comment> Comments { get; set; }
+        public int UserID { get; set; }
+        public virtual User User { get; set; }
         public Post()
         {
             Comments = new List<Comment>();

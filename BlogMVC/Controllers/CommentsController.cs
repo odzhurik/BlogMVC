@@ -5,10 +5,11 @@ using System.Web.Mvc;
 
 namespace BlogMVC.Controllers
 {
+    [Authorize]
     public class CommentsController : Controller
     {
-        private ICommentRepository _repository;
-        public CommentsController(ICommentRepository repository)
+        private IBlogRepository _repository;
+        public CommentsController(IBlogRepository repository)
         {
             _repository = repository;
         }
@@ -21,6 +22,8 @@ namespace BlogMVC.Controllers
         public ActionResult Create(int? PostID)
         {
             ViewBag.PostID = PostID;
+            User user = _repository.FindByName(User.Identity.Name);
+            ViewBag.UserID = user.ID;
             return PartialView("_Create");
         }
         [HttpPost]
@@ -45,6 +48,8 @@ namespace BlogMVC.Controllers
             {
                 return HttpNotFound();
             }
+            User user = _repository.FindByName(User.Identity.Name);
+            ViewBag.UserID = user.ID;
             return PartialView("_Edit", comment);
 
         }

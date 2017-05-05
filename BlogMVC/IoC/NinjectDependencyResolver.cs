@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace BlogMVC.IoC
 {
-    public class NinjectDependencyResolver:IDependencyResolver 
+    public class NinjectDependencyResolver : IDependencyResolver
     {
         private IKernel kernel;
         public NinjectDependencyResolver(IKernel kernelParam)
@@ -26,8 +26,7 @@ namespace BlogMVC.IoC
         }
         private void AddBindings()
         {
-            kernel.Bind<ICommentRepository>().To<CommentRepository>();
-            kernel.Bind<IPostRepository>().To<PostRepository>();
+            kernel.Bind<IBlogRepository>().To<BlogRepository>();
         }
     }
 }

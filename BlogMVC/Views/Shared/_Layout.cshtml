@@ -18,13 +18,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Блог", "Index", "Posts", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Blog", "Index",new { Controller = "Start" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Главная страница", "Index", "Posts")</li>
-                    <li>@Html.ActionLink("Написать пост", "Create", "Posts")</li>
-                                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Home page", "Index",new { Controller="Posts",id=0})</li>
+                        <li>@Html.ActionLink("Create a post", "Create", "Posts")</li>
+                        <li>@Html.ActionLink("Log out", "Logoff", "Account")</li>
+                    }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Sign in", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Registration", "Register", "Account")</li>
+                    }
+
+                </ul>
             </div>
         </div>
     </div>
@@ -36,7 +46,7 @@
         </footer>
     </div>
 
-    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -2,10 +2,10 @@
 @model Post
 
 @{
-    ViewBag.Title = "Написать пост";
+    ViewBag.Title = "Create a post";
 }
 
-<h2>Написать пост</h2>
+<h2>Create a post</h2>
 
 
 @using (Html.BeginForm())
@@ -34,11 +34,12 @@
 
         <div class="form-group">
             @Html.Hidden("Time", @DateTime.Now)
+            @Html.Hidden("UserID",(int)ViewBag.UserId)
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Написать" class="btn btn-success" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>

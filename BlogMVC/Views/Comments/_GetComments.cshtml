@@ -9,9 +9,11 @@
             @Html.DisplayNameFor(modelItem => modelItem.Time)-
             @Html.DisplayFor(modelItem => item.Time)
         </p>
-        
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "EditComment", id = "comment-" + item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "DeleteComment" })
+        @if(item.User.UserName==User.Identity.Name)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "EditComment", id = "comment-" + item.ID });<label>|</label>
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "DeleteComment" });
+        }
     </div>
 }
 

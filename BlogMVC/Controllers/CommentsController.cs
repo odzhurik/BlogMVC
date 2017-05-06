@@ -1,11 +1,12 @@
-﻿using DAL.Repository;
+﻿using BlogMVC.Custom_Attributes;
+using DAL.Repository;
 using Entities;
 using System.Net;
 using System.Web.Mvc;
 
 namespace BlogMVC.Controllers
 {
-    [Authorize]
+    
     public class CommentsController : Controller
     {
         private IBlogRepository _repository;
@@ -19,6 +20,7 @@ namespace BlogMVC.Controllers
             return PartialView("_GetComments", _repository.GetComments(PostID));
         }
         [HttpGet]
+        [MyAuthentication]
         public ActionResult Create(int? PostID)
         {
             ViewBag.PostID = PostID;
@@ -37,6 +39,7 @@ namespace BlogMVC.Controllers
             return HttpStatusCode.BadRequest;
         }
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -54,6 +57,7 @@ namespace BlogMVC.Controllers
 
         }
         [HttpPost]
+        [Authorize]
         public HttpStatusCode Edit(Comment comment)
         {
             if (ModelState.IsValid)
@@ -64,6 +68,7 @@ namespace BlogMVC.Controllers
             return HttpStatusCode.BadRequest;
         }
         [HttpPost]
+        [Authorize]
         public HttpStatusCode Delete(int id)
         {
             _repository.DeleteComment(id);

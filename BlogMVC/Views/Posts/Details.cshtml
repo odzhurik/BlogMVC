@@ -20,8 +20,16 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Home page", "Index")|
+    
+    @if (Model.User.UserName == User.Identity.Name)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) <label>|</label>
+        @Html.ActionLink("Home page", "Index")<label>|</label>
+    }
+    @if (Model.User.UserName != User.Identity.Name)
+    {
+        @Html.ActionLink("Back to " + (string)ViewBag.Name + "'s page", "Index", new { Controller = "Posts", id = Model.UserID })<label>|</label>
+    }
     @Html.ActionLink("Leave a comment", "Create", "Comments", new { id = "AddComment" })
 </p>
 <div id="CommentCreate" style="padding: 40px;">

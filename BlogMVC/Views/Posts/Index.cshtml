@@ -1,34 +1,42 @@
 ﻿@using BlogMVC.Helpers
 @using Entities
 @model IEnumerable<Post>
-
-@{
+@if (Model.All(p => p.User.UserName == User.Identity.Name))
+{
     ViewBag.Title = "Home Page";
+    <h2>Home page</h2>
+
+    <p>
+        @Html.ActionLink("Create a post", "Create")
+    </p>
 }
+@if (Model.All(p => p.User.UserName != User.Identity.Name))
+{
+    ViewBag.Title = (string)ViewBag.Name + "'s Page";
+    <h2>@ViewBag.Name's Page</h2>
+}
+@foreach (var item in Model)
+{
+    <div class="blogDiv">
+        <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
 
-<h2>Home page</h2>
+        @Html.CustomDisplay(modelItem => item.Text)
+        <br />
+        <p class="Date">
+            @Html.DisplayNameFor(modelItem => modelItem.Time)-
+            @Html.DisplayFor(modelItem => item.Time)
+        </p>
+        <br />
+        @if (User.Identity.Name == item.User.UserName)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) <label>|</label>
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })<label>|</label>
+        }
 
-<p>
-    @Html.ActionLink("Create a post", "Create")
-</p>
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
 
+    </div>
 
-    @foreach (var item in Model)
-    {
-        <div class="blogDiv">
-            <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
-           
-                  @Html.CustomDisplay(modelItem => item.Text)
-            <br />
-            <p class="Date">@Html.DisplayNameFor(modelItem=>modelItem.Time)-
-                @Html.DisplayFor(modelItem => item.Time)
-                </p>
-           <br />
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </div>
-            
-    }
+}
 
 

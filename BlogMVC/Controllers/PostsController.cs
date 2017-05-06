@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace BlogMVC.Controllers
 {
-    
+
     public class PostsController : Controller
     {
         private IBlogRepository _repository;
@@ -20,20 +20,16 @@ namespace BlogMVC.Controllers
         public ActionResult Index(int? id)
         {
             User user = new User();
-            if (id == null || id==0)
+            if (id == null || id == 0)
             {
                 user = _repository.FindByName(User.Identity.Name);
-                TempData["UserId"] = user.ID;
+                Session["UserId"] = user.ID;
                 return View(_repository.GetPosts(user.ID));
             }
             user = _repository.GetUser(id);
-            TempData["UserId"] = user.ID;
-            if (user.UserName == User.Identity.Name)
-            {
-                return View(_repository.GetPosts(user.ID));
-            }
             ViewBag.Name = user.UserName;
-            return View("BlogPage", _repository.GetPosts(user.ID));
+            Session["UserId"] = user.ID;
+            return View(_repository.GetPosts(user.ID));
         }
         public ActionResult Details(int? id)
         {
@@ -46,13 +42,9 @@ namespace BlogMVC.Controllers
             {
                 return HttpNotFound();
             }
-            User user = _repository.GetUser(Convert.ToInt32(TempData["UserId"]));
-            if(User.Identity.Name==user.UserName)
-            {
-                return View(post);
-            }
+            User user = _repository.GetUser(Convert.ToInt32(Session["UserId"]));
             ViewBag.Name = user.UserName;
-            return View("PostDetails",post);
+            return View(post);
         }
         public ActionResult Create()
         {

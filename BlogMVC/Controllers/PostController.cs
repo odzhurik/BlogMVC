@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BlogMVC.Models;
+using DAL;
 using DAL.Repository;
 using Entities;
 using System;
@@ -9,27 +10,30 @@ using System.Web.Mvc;
 
 namespace BlogMVC.Controllers
 {
-
-    public class PostsController : Controller
+    public class PostController : Controller
     {
         private IBlogRepository _repository;
-        public PostsController(IBlogRepository repository)
+        public PostController(IBlogRepository repository)
         {
             _repository = repository;
         }
         public ActionResult Index(int? id)
         {
             User user = new User();
+            BlogViewModel model = new BlogViewModel();
             if (id == null || id == 0)
             {
                 user = _repository.FindByName(User.Identity.Name);
-                Session["UserId"] = user.ID;
-                return View(_repository.GetPosts(user.ID));
+                Session["BlogId"] = user.Blog.ID;
+                model.Blog = user.Blog;
+                model.Posts = _repository.GetPosts(user.Blog.ID);
+                return View(model);
             }
             user = _repository.GetUser(id);
-            ViewBag.Name = user.UserName;
-            Session["UserId"] = user.ID;
-            return View(_repository.GetPosts(user.ID));
+            Session["BlogId"] = user.ID;
+            model.Blog = user.Blog;
+            model.Posts = _repository.GetPosts(user.Blog.ID);
+            return View(model);
         }
         public ActionResult Details(int? id)
         {
@@ -43,14 +47,15 @@ namespace BlogMVC.Controllers
                 return HttpNotFound();
             }
             User user = _repository.GetUser(Convert.ToInt32(Session["UserId"]));
-            ViewBag.Name = user.UserName;
-            return View(post);
+             return View(post);
         }
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Create()
         {
             User user = _repository.FindByName(User.Identity.Name);
-            ViewBag.UserId = user.ID;
-            return View();
+            Post post = new Post();
+            post.Blog = user.Blog;
+             return View(post);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -64,6 +69,7 @@ namespace BlogMVC.Controllers
 
             return View(post);
         }
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,10 +90,11 @@ namespace BlogMVC.Controllers
             if (ModelState.IsValid)
             {
                 _repository.EditPost(post);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Post");
             }
             return View(post);
         }
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -106,7 +113,12 @@ namespace BlogMVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             _repository.DeletePost(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Post");
+        }
+        [HttpGet]
+        public JsonResult GetByCategory(int? id)
+        {
+            return Json(_repository.GetPostsByCategory(id).Select(p => new { Title = p.Title, ID = p.ID }), JsonRequestBehavior.AllowGet);
         }
     }
 }

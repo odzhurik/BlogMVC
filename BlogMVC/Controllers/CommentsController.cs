@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BlogMVC.Controllers
 {
-    
+
     public class CommentsController : Controller
     {
         private IBlogRepository _repository;
@@ -14,7 +14,6 @@ namespace BlogMVC.Controllers
         {
             _repository = repository;
         }
-
         public ActionResult GetComments(int? PostID)
         {
             return PartialView("_GetComments", _repository.GetComments(PostID));
@@ -23,10 +22,11 @@ namespace BlogMVC.Controllers
         [MyAuthentication]
         public ActionResult Create(int? PostID)
         {
-            ViewBag.PostID = PostID;
             User user = _repository.FindByName(User.Identity.Name);
-            ViewBag.UserID = user.ID;
-            return PartialView("_Create");
+            Comment comment = new Comment();
+            comment.UserID = user.ID;
+            comment.PostID = (int)PostID;
+            return PartialView("_Create", comment);
         }
         [HttpPost]
         public HttpStatusCode Create(Comment comment)
@@ -39,7 +39,7 @@ namespace BlogMVC.Controllers
             return HttpStatusCode.BadRequest;
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -52,12 +52,10 @@ namespace BlogMVC.Controllers
                 return HttpNotFound();
             }
             User user = _repository.FindByName(User.Identity.Name);
-            ViewBag.UserID = user.ID;
+            comment.UserID = user.ID;
             return PartialView("_Edit", comment);
-
         }
         [HttpPost]
-        [Authorize]
         public HttpStatusCode Edit(Comment comment)
         {
             if (ModelState.IsValid)
@@ -68,7 +66,7 @@ namespace BlogMVC.Controllers
             return HttpStatusCode.BadRequest;
         }
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User, Admin")]
         public HttpStatusCode Delete(int id)
         {
             _repository.DeleteComment(id);

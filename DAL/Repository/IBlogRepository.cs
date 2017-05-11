@@ -23,5 +23,16 @@ namespace DAL.Repository
         User FindByName(string name);
         bool AddUser(User user);
         User GetUser(int? id);
+        IEnumerable<Category> GetCategories();
+        void AddBlog(Blog blog);
+        IEnumerable<Blog> GetBlogsByCategory(int? id);
+        IEnumerable<Post> GetPostsByCategory(int? id);
+        IEnumerable<string> GetRolesForUser(string userName);
+        void AddRole(string roleName);
+        Role GetRole(int? id);
+        Role GetRoleByName(string name);
+        void EditUser(User user);
+        IEnumerable<User> GetUsers();
+        void EditBlog(Blog blog);
     }
 }

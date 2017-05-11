@@ -32,7 +32,7 @@ namespace BlogMVC.Controllers
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(enteredUser.UserName, true);
-                    return RedirectToAction("Index", "Posts");
+                    return RedirectToAction("Index", "Blog");
                 }
                 else
                 {
@@ -66,15 +66,15 @@ namespace BlogMVC.Controllers
                 user.Password = newUser.Password;
                 if (_repository.AddUser(user))
                 {
-                    return RedirectToAction("Index",new { Controller="Posts", id=user.ID});
+                    return RedirectToAction("Create","Blog");
                 }
             }
-            return RedirectToAction("Register");
+            return RedirectToAction("Register","Account");
         }
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Start");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

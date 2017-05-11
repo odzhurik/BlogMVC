@@ -2,18 +2,19 @@
 @model Post
 
 @{
-    ViewBag.Title = "Edit post";
+    ViewBag.Title = "Create a post";
 }
 
-<h2>Edit</h2>
+<h2>Create a post</h2>
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
 
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -27,25 +28,35 @@
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Text, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="CategoryList" name="CategoryID" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
 
+            </div>
+        </div>
         <div class="form-group">
             @Html.Hidden("Time", @DateTime.Now)
+            @Html.Hidden("BlogID", Model.Blog.ID)
+            @Html.Hidden("Visible", true)
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Сохранить" class="btn btn-success" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
 <div>
-    @Html.ActionLink("Home Page", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script src="~/Scripts/GetCategories.js"></script>

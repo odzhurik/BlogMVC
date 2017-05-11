@@ -18,9 +18,12 @@ namespace Entities
         public string Text { get; set; }
         [Display(Name ="Added")]
         public DateTime Time { get; set; }
+        public bool Visible { get; set; }
         virtual public ICollection<Comment> Comments { get; set; }
-        public int UserID { get; set; }
-        public virtual User User { get; set; }
+        public virtual Blog Blog { get; set; }
+        public int BlogID { get; set; }
+        public virtual Category Category { get; set; }
+        public int CategoryID { get; set; }
         public Post()
         {
             Comments = new List<Comment>();

@@ -18,17 +18,19 @@
         @Html.DisplayFor(modelItem => modelItem.Time)
     </p>
 </div>
-
 <p>
-    
-    @if (Model.User.UserName == User.Identity.Name)
+    @if (Model.Blog.User.UserName == User.Identity.Name)
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) <label>|</label>
         @Html.ActionLink("Home page", "Index")<label>|</label>
     }
-    @if (Model.User.UserName != User.Identity.Name)
+    @if (Model.Blog.User.UserName != User.Identity.Name)
     {
-        @Html.ActionLink("Back to " + (string)ViewBag.Name + "'s page", "Index", new { Controller = "Posts", id = Model.UserID })<label>|</label>
+        @Html.ActionLink("Back to " + Model.Blog.User.UserName + "'s page", "Index", "Post", new { id = Model.Blog.User.ID }, null)<label>|</label>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Hide", "HidePost", "Admin", new { id = Model.ID }, htmlAttributes: new { id = "HidePost" })<label>|</label>
     }
     @Html.ActionLink("Leave a comment", "Create", "Comments", new { id = "AddComment" })
 </p>
@@ -40,3 +42,4 @@
 
 </div>
 <script src="~/Scripts/Comments.js"></script>
+<script src="~/Scripts/HidePost.js"></script>

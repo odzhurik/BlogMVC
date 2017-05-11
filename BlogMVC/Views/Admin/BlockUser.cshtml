@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Entities.User>
+@{
+    ViewBag.Title = "BlockUser";
+}
+
+<h2>BlockUser</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.UserName)</th>
+            <th>@Html.DisplayNameFor(model=>model.Role)</th>
+            <th>Block User</th>
+
+                    </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Role.Name</td>
+                <td>@Html.ActionLink("Block","BlockUser",new {id=item.ID },htmlAttributes:new {@class="BlockLink" })</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+<script src="~/Scripts/BlockUser.js"></script>

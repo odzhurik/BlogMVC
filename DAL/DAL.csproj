@@ -72,6 +72,34 @@
     <Compile Include="Migrations\201705050725371_changed db.Designer.cs">
       <DependentUpon>201705050725371_changed db.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705081754407_added categories.cs" />
+    <Compile Include="Migrations\201705081754407_added categories.Designer.cs">
+      <DependentUpon>201705081754407_added categories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705090859129_changed blog.cs" />
+    <Compile Include="Migrations\201705090859129_changed blog.Designer.cs">
+      <DependentUpon>201705090859129_changed blog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705090906434_changed blog1.cs" />
+    <Compile Include="Migrations\201705090906434_changed blog1.Designer.cs">
+      <DependentUpon>201705090906434_changed blog1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705090920404_changed context.cs" />
+    <Compile Include="Migrations\201705090920404_changed context.Designer.cs">
+      <DependentUpon>201705090920404_changed context.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705091141559_changed entities1.cs" />
+    <Compile Include="Migrations\201705091141559_changed entities1.Designer.cs">
+      <DependentUpon>201705091141559_changed entities1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705091147511_changed entities2.cs" />
+    <Compile Include="Migrations\201705091147511_changed entities2.Designer.cs">
+      <DependentUpon>201705091147511_changed entities2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705100713533_added role.cs" />
+    <Compile Include="Migrations\201705100713533_added role.Designer.cs">
+      <DependentUpon>201705100713533_added role.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BlogRepository.cs" />
@@ -105,6 +133,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705050725371_changed db.resx">
       <DependentUpon>201705050725371_changed db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705081754407_added categories.resx">
+      <DependentUpon>201705081754407_added categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705090859129_changed blog.resx">
+      <DependentUpon>201705090859129_changed blog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705090906434_changed blog1.resx">
+      <DependentUpon>201705090906434_changed blog1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705090920404_changed context.resx">
+      <DependentUpon>201705090920404_changed context.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091141559_changed entities1.resx">
+      <DependentUpon>201705091141559_changed entities1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091147511_changed entities2.resx">
+      <DependentUpon>201705091147511_changed entities2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705100713533_added role.resx">
+      <DependentUpon>201705100713533_added role.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

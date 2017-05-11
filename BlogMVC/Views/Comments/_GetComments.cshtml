@@ -9,7 +9,7 @@
             @Html.DisplayNameFor(modelItem => modelItem.Time)-
             @Html.DisplayFor(modelItem => item.Time)
         </p>
-        @if(item.User.UserName==User.Identity.Name)
+        @if(item.User.UserName==User.Identity.Name || User.IsInRole("Admin"))
         {
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "EditComment", id = "comment-" + item.ID });<label>|</label>
             @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "DeleteComment" });

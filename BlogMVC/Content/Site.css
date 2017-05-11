@@ -49,3 +49,30 @@ textarea {
 .Date {
     font-family: 'Neucha', cursive;
 }
+.chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 25px;
+    font-size: 16px;
+    line-height: 25px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+   
+}
+.menu {
+    width: 25px;
+    height: 4px;
+    background-color: white;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.dropdown:hover .menu {
+    background-color: #828088;
+}
+
+.dropdown
+{
+    margin: 6px 0;
+    
+}

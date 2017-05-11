@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-   public class User
+    public class User
     {
         public int ID { get; set; }
         [Required]
         public string UserName { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual Blog Blog { get; set; }
+        public int RoleID { get; set; }
+        public virtual Role Role { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public User()
         {
-            Posts = new List<Post>();
             Comments = new List<Comment>();
         }
     }

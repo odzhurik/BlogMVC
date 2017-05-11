@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BlogMVC.Controllers
 {
-    public class StartController : Controller
+    public class HomeController : Controller
     {
         // GET: Start
         public ActionResult Index()

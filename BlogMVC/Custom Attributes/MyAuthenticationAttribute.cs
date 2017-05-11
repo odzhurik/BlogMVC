@@ -26,6 +26,12 @@ namespace BlogMVC.Custom_Attributes
                 filterContext.Result = new ContentResult { Content = "<b>You must <a href='/Account/Login'>log in</a></b>" };
                 
             }
+            if (user == null || user.IsInRole("Blocked User"))
+            {
+                filterContext.Result = new ContentResult { Content = "<b>You're blocked" };
+
+            }
+
         }
     }
 }

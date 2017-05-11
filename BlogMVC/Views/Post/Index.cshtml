@@ -1,0 +1,48 @@
+﻿@using BlogMVC.Helpers
+@using Entities
+@model BlogMVC.Models.BlogViewModel
+@{
+    ViewBag.Title = Model.Blog.Title;
+}
+<h2 style="text-align:center">@Model.Blog.Title</h2>
+<center>
+    <div class="chip">
+        <b>@Model.Blog.Category.Name</b>
+    </div>
+</center>
+@if (Model.Blog.User.UserName == User.Identity.Name)
+{
+    <p>
+        @Html.ActionLink("Create a post", "Create")
+    </p>
+}
+@foreach (Post item in Model.Posts)
+{
+    if (item.Visible)
+    {
+        <div class="blogDiv">
+            <h5> @Html.DisplayFor(modelItem => item.Title)</h5>
+
+            @Html.CustomDisplay(modelItem => item.Text)
+            <br />
+            <p class="Date">
+                @Html.DisplayNameFor(modelItem => item.Time)-
+                @Html.DisplayFor(modelItem => item.Time)
+            </p>
+            <br />
+            @if (User.Identity.Name == item.Blog.User.UserName)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) <label>|</label>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })<label>|</label>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Hide", "HidePost", "Admin", new { id = item.ID }, htmlAttributes: new { id = "HidePost" })<label>|</label>
+            }
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+        </div>
+    }
+}
+<script src="~/Scripts/HidePost.js"></script>
+

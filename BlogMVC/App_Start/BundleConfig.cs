@@ -25,6 +25,7 @@ namespace BlogMVC
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/StartPage.css",
                       "~/Content/site.css"));
         }
     }

@@ -46,8 +46,12 @@ namespace BlogMVC.Controllers
             {
                 return HttpNotFound();
             }
-            User user = _repository.GetUser(Convert.ToInt32(Session["UserId"]));
-             return View(post);
+            if (post.Visible || User.IsInRole("Admin"))
+            {
+                User user = _repository.GetUser(Convert.ToInt32(Session["UserId"]));
+                return View(post);
+            }
+            return RedirectToAction("Index");
         }
         [Authorize(Roles = "User, Admin")]
         public ActionResult Create()

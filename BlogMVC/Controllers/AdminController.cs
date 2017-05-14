@@ -24,7 +24,13 @@ namespace BlogMVC.Controllers
         public JsonResult HidePost(int id)
         {
             Post post = _repository.GetPost(id);
-            post.Visible = false;
+            if (post.Visible)
+            {
+                post.Visible = false;
+                _repository.EditPost(post);
+                return Json("Ok", JsonRequestBehavior.AllowGet);
+            }
+            post.Visible = true;
             _repository.EditPost(post);
             return Json("Ok", JsonRequestBehavior.AllowGet);
         }
@@ -36,8 +42,16 @@ namespace BlogMVC.Controllers
         [HttpPost]
         public JsonResult BlockUser(int id)
         {
-            Role role = _repository.GetRoleByName("Blocked User");
             User user = _repository.GetUser(id);
+            Role role;
+            if (user.Role.Name == "User")
+            {
+                role = _repository.GetRoleByName("Blocked User");
+                user.Role = role;
+                _repository.EditUser(user);
+                return Json("Ok");
+            }
+            role = _repository.GetRoleByName("User");
             user.Role = role;
             _repository.EditUser(user);
             return Json("Ok");

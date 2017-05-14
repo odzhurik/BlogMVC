@@ -29,6 +29,8 @@
                         <li>@Html.ActionLink("Registration", "Register", "Account")</li>
                     }
                 </ul>
+                <ul class="nav navbar-right">
+                    <li>
                 <div class="dropdown">
                     <div class="menu"></div>
                     <div class="menu"></div>
@@ -39,11 +41,17 @@
                             @Html.ActionLink("Home page", "Index", "Post", new { id = 0 }, null)
                             @Html.ActionLink("Edit Blog", "Edit", "Blog")
                             @Html.ActionLink("Create a post", "Create", "Post")
+                            if(User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Block User","BlockUser","Admin")
+                            }
                             @Html.ActionLink("Log out", "Logoff", "Account")
                         }
                     </div>
 
                 </div>
+                        </li>
+                    </ul>
             </div>
         </div>
     </div>

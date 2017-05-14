@@ -5,7 +5,8 @@
         type: "GET",
         dataType: 'json',
         success: function (data) {
-            if (data === "Ok") {
+            if (data === "Ok")
+            {
                 location.reload();
             }
         },

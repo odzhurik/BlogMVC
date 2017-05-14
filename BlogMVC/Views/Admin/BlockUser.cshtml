@@ -20,7 +20,7 @@
             <tr>
                 <td>@item.UserName</td>
                 <td>@item.Role.Name</td>
-                <td>@Html.ActionLink("Block","BlockUser",new {id=item.ID },htmlAttributes:new {@class="BlockLink" })</td>
+                <td>@Html.ActionLink("Block/Unblock","BlockUser",new {id=item.ID },htmlAttributes:new {@class="BlockLink" })</td>
             </tr>
         }
     </tbody>
